@@ -1,0 +1,14 @@
+
+ 
+
+<div class="card-header d-flex justify-content-between">
+  <span>Bear Lists</span>
+
+<%= link_to '+', new_bear_list_path , class: 'btn btn-primary btn-sm  text-white' %></div>
+
+<ul class="list-group">
+
+  <% @bear_lists.each do |bear_list| %>
+    <li class="list-group-item"><%= link_to bear_list.title, bear_list, class: "alert-link" %> </li>
+  <% end %>
+</ul>

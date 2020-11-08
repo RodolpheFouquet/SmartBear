@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Colour:</b>
+  <%= @bear.colour %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @bear.name %>
+</p>
+
+<p>
+  <b>Portrait:</b>
+  <%= @bear.portrait %>
+</p>
+
+
+<%= link_to 'Edit', edit_bear_list_bear_path(@bear.bear_list, @bear) %> |
+<%= link_to 'Back', bear_list_bears_path(@bear.bear_list) %>

@@ -1,0 +1,39 @@
+<div class="card-header d-flex justify-content-between">
+  <span>
+    <%= @bear_list.title %>
+  </span>
+
+  <div class="d-flex justify-content-end ">
+    <%= link_to 'Edit', edit_bear_list_path(@bear_list) , class: 'btn btn-warning btn-sm mr-2 text-white' %></div>
+</div>
+
+
+<div class="card-body">
+  <ul class="list-group">
+
+    <% @list.each do |bear| %>
+    <li class="list-group-item">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-start ">
+          <img class="little-bear mr-2"
+            src="<% if bear.colour == "brown" %><%= image_path("brownbear")%><% else %><%= image_path("blackbear")%><% end %>" />
+          <%= bear.name %>
+        </div>
+        <% if bear.portrait %>
+        <img class="little-bear" src="<%= bear.portrait %>" />
+        <% end %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <footer data-controller="bear"> 
+  <%= form_with(model: [@bear_list, @bear], class: "form-inline  mt-4" ) do | form | %>
+      <label class="sr-only" for="name">Name</label>
+      <%= form.text_field :name, class: "form-control form-control-sm mb-2 mr-sm-1", placeholder: "Winnie the Pooh" %>
+      <label class="sr-only" for="portrait">Portrait</label>
+      <%= form.text_field :portrait, class: "form-control form-control-sm  mb-2 mr-sm-2", placeholder: "Portrait URL" %>
+      <%= form.select(:colour, [['Brown', "brown"], ['Black', "black"]],{}, { class: "custom-select custom-select-sm mb-2 mr-sm-2"}) %>  
+      <%= form.submit 'Add bear', class: "btn-sm btn-primary mb-2" %>
+    <% end %>
+  </footer>
+</div>
