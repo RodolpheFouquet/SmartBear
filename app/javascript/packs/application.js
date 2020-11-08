@@ -8,10 +8,27 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+const manifestUri = 'https://dxhzau39q4hos.cloudfront.net/bears/playlist.m3u8';
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+
+
+$(document).on("turbolinks:load", () => {
+    console.log('lol')
+    var video = document.getElementById('video');
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = manifestUri;
+        video.addEventListener('loadedmetadata', function() {
+          video.play();
+        });
+      //
+      // If no native HLS support, check if hls.js is supported
+      //
+      } else if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(manifestUri);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+          video.play();
+        });
+      }
+})

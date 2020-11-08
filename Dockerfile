@@ -7,6 +7,10 @@ COPY package.json yarn.lock ./
 
 COPY . ./
 
+RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
+    libpq-dev \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 RUN bundle install
 RUN yarn install
 RUN SECRET_KEY_BASE=dummy OLD_AWS_SECRET_ACCESS_KEY=dummy OLD_AWS_ACCESS_KEY_ID=dummy  RAILS_ENV=production NODE_ENV=production rails assets:precompile
