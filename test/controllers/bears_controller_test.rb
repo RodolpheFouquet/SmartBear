@@ -21,7 +21,7 @@ class BearsControllerTest < ActionController::TestCase
       post :create, params: { bear_list_id: @bear_list, bear: @bear.attributes }
     end
 
-    assert_redirected_to bear_list_bear_path(@bear_list, Bear.last)
+    assert_redirected_to bear_list_url( @bear_list)
   end
 
   test "should show bear" do

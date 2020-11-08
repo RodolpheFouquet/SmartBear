@@ -38,11 +38,5 @@ class BearListsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to bear_list_url(@bear_list)
   end
 
-  test "should destroy bear_list" do
-    assert_difference('BearList.count', -1) do
-      delete bear_list_url(@bear_list)
-    end
 
-    assert_redirected_to bear_lists_url
-  end
 end
